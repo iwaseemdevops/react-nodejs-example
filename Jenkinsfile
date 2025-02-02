@@ -1,52 +1,31 @@
+#!/usr/bin/env groovy
+
 pipeline {
-    agent any  // This runs on any available agent
-
+    agent any
     stages {
-        stage('Build') {
+        stage('test') {
             steps {
                 script {
-                    // Your build steps (e.g., npm install for Node.js projects)
-                    echo 'Building the project...'
-                    
+                    echo "Testing the application..."
                 }
             }
         }
-
-        stage('Test') {
+        stage('build') {
             steps {
                 script {
-                    // Your test steps (e.g., running tests)
-                    echo 'Running tests...'
-                  
+                    echo "Building the application..."
                 }
             }
         }
-
-        stage('Deploy') {
+        stage('deploy') {
             steps {
                 script {
-                    // Your deploy steps (e.g., pushing to production server)
-                    echo 'Deploying the project...'
-    
+                    def dockerCmd = 'docker run -p 3080:3080 -d iwaseemdevops/my-app:11201-12'
+                    sshagent(['ec2-server-key']) {
+                       sh "ssh -o StrickHostKeyChecking=no ec2_user@43.204.111.197 ${dockerCmd}" 
+                    }
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            // Steps that always run after the pipeline, e.g., cleanup
-            echo 'Cleaning up...'
-        }
-
-        success {
-            // Steps to take if the pipeline succeeds
-            echo 'Pipeline succeeded!'
-        }
-
-        failure {
-            // Steps to take if the pipeline fails
-            echo 'Pipeline failed!'
         }
     }
 }
