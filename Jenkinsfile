@@ -1,5 +1,3 @@
-#!/usr/bin/env groovy
-
 pipeline {
     agent any
     stages {
@@ -20,9 +18,8 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                    def dockerCmd = 'docker run -p 3080:3080 -d iwaseemdevops/my-app:11201-12'
                     sshagent(['ec2-server-key']) {
-                       sh "ssh -o StrickHostKeyChecking=no ec2_user@43.204.111.197 ${dockerCmd}" 
+                        sh "ssh -o StrictHostKeyChecking=no ec2_user@43.204.111.197 \"docker run -p 80:80 -d iwaseemdevops/my-app:11201-12\""
                     }
                 }
             }
