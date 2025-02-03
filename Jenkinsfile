@@ -18,7 +18,7 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                    sshagent(['ec2-server-key-2']) {
+                    sshagent(['ec2-server-key']) {
                         // First, check if SSH connection works
                         sh "ssh -o StrictHostKeyChecking=no ec2_user@43.204.111.197 'echo SSH is working'"
 
