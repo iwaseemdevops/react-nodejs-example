@@ -23,10 +23,10 @@ pipeline {
                         sh "ssh -o StrictHostKeyChecking=no ec2_user@43.204.111.197 'echo SSH is working'"
 
                         // Check if docker run command is passed correctly
-                        sh "echo docker run -p 3080:80 -d iwaseemdevops/my-app:11201-12"
+                        sh "echo docker run -p 3080:3080 -d iwaseemdevops/my-app:11201-12"
 
                         // Finally, run the docker command with SSH
-                        sh "ssh -o StrictHostKeyChecking=no ec2_user@43.204.111.197 \"docker run -p 3080:80 -d iwaseemdevops/my-app:11201-12\""
+                        sh "ssh -o StrictHostKeyChecking=no ec2_user@43.204.111.197 \"docker run -p 3080:3080 -d iwaseemdevops/my-app:1.0\""
                     }
                 }
             }
