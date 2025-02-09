@@ -1,28 +1,21 @@
 pipeline {
-    agent any  // This runs on any available agent
-
+    agent any
     stages {
-        stage('Build') {
+        stage('test') {
             steps {
                 script {
-                    // Your build steps (e.g., npm install for Node.js projects)
-                    echo 'Building the project...'
-                    
+                    echo "Testing the application..."
                 }
             }
         }
-
-        stage('Test') {
+        stage('build') {
             steps {
                 script {
-                    // Your test steps (e.g., running tests)
-                    echo 'Running tests...'
-                  
+                    echo "Building the application..."
                 }
             }
         }
-
-        stage('Deploy') {
+        stage('deploy') {
             steps {
                 script {
                     // Your deploy steps (e.g., pushing to production server)
