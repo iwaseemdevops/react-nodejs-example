@@ -27,6 +27,9 @@ pipeline {
                 script {
                     // Your deploy steps (e.g., pushing to production server)
                     echo 'Deploying the project...'
+                    sshagent(['ec2-server-key']) {
+                        
+                    }
     
                 }
             }
